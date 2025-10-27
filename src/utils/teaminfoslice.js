@@ -3,230 +3,129 @@ import { createSlice } from "@reduxjs/toolkit";
 const teamInfoSlice=createSlice({
     name:"teaminfo",
     initialState:{
-        team1Info:[
-            {
-                    id:0,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:1,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:2,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:3,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:4,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:5,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:6,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:7,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },{
-                    id:8,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:9,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:10,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:11,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                }
-        ],
+        team1Info:[],
         team2info:[
-            {
-                    id:0,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:1,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:2,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:3,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:4,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:5,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:6,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:7,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },{
-                    id:8,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:9,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:10,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                },
-                {
-                    id:11,
-                    playerName:'',
-                    four:0,
-                    six:0,
-                    runs:0,
-                    wicket:0,
-                    over:0
-                }
+            // {
+            //         id:0,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:1,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:2,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:3,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:4,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:5,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:6,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:7,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },{
+            //         id:8,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:9,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:10,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     },
+            //     {
+            //         id:11,
+            //         playerName:'',
+            //         four:0,
+            //         six:0,
+            //         runs:0,
+            //         wicket:0,
+            //         over:0
+            //     }
         ],
         toss:{
             team:'',
             chossto:'',
-        }
+            overs:0,
+        },
+        currentBowlerScore:[0],
     },
     reducers:{
+        updateCurrentBowler:(state,action)=>{
+            const length=state.currentBowlerScore.length-1;
+            state.currentBowlerScore[length]=action.payload;
+            state.currentBowlerScore.push(0);
+        },
         addteam1:(state,action)=>{
             state.team1Info=[];
             for(let i=1;i<=action.payload;i++){
@@ -237,7 +136,8 @@ const teamInfoSlice=createSlice({
                     six:0,
                     runs:0,
                     wicket:0,
-                    over:0
+                    over:0,
+                    bowlingruns:0
                 })
             }
         },
@@ -257,7 +157,8 @@ const teamInfoSlice=createSlice({
                     six:0,
                     runs:0,
                     wicket:0,
-                    over:0
+                    over:0,
+                    bowlingruns:0
                 }
                 )
             }
@@ -276,4 +177,4 @@ const teamInfoSlice=createSlice({
     }
 });
 export default teamInfoSlice.reducer;
-export const {addteam1,updateuserName,addteam2,updateuserNameteam2,updateToss}=teamInfoSlice.actions
+export const {addteam1,updateuserName,addteam2,updateuserNameteam2,updateToss,updateCurrentBowler}=teamInfoSlice.actions

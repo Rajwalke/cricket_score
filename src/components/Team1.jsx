@@ -8,7 +8,7 @@ const Team1=()=>{
     return(
         <div>
             <h1>Team1</h1>
-            <select onChange={(e)=>{
+            {/* <select onChange={(e)=>{
                 // setPlayerQuantity(e.target.value);
                 dispatch(addteam1(e.target.value));
             }}>
@@ -19,7 +19,7 @@ const Team1=()=>{
                 <option value="9">9</option>
                 <option value="10">10</option>
                 <option value="11" selected>11</option>
-            </select>
+            </select> */}
 
             <div>
                 {

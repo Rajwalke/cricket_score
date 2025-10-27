@@ -7,7 +7,7 @@ const Team2=()=>{
     return(
         <div>
             <h1>Team-2</h1>
-            <select onChange={(e)=>{
+            {/* <select onChange={(e)=>{
                 dispatch(addteam2(e.target.value));
             }}>
                 <option value="5">5</option>
@@ -17,7 +17,7 @@ const Team2=()=>{
                 <option value="9">9</option>
                 <option value="10">10</option>
                 <option value="11">11</option>
-            </select>
+            </select> */}
             <div>
                 {
                     playerQuanity.map((info,index)=>(

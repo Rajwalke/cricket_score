@@ -7,7 +7,7 @@ const Score=()=>{
     const toss=useSelector((store)=>store.Info.toss);
     const [chooseTeam,setChooseTeam]=useState(false);
     const team1=useSelector((store)=>store.Info.team1Info);
-    const team2=useSelector((store)=>store.Info.team2Info);
+    const team2=useSelector((store)=>store.Info.team2info);
     //team1-true team2-false
     useEffect(()=>{
     if(toss.team==='team1' && toss.chossto==='bat'){
@@ -23,7 +23,7 @@ const Score=()=>{
     return(
         <div>
             <h1>Score Page</h1>
-           {(chooseTeam)? <Scoreteam1 chooseTo={chooseTeam} teamInfo={team1} />:<Scoreteam2 teamInfo={team2} chooseTo={chooseTeam}/>}
+           {(chooseTeam)? <Scoreteam1 chooseTo={chooseTeam} teamInfo={[team1,team2]} toss={toss}/>:<Scoreteam2 chooseTo={chooseTeam} teamInfo={[team1,team2]} toss={toss} />}
         </div>
     )
 };

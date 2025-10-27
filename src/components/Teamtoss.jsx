@@ -43,9 +43,26 @@ const Teamtoss=()=>{
                     }}
                 >Ball</button>
             </section>
+            <section>
+                <label>How Many Overs</label>
+                <select
+                onChange={(e)=>{
+                    dispatch(updateToss({key:'overs',value:e.target.value}))
+                }} >
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="50">35</option>
+                    <option value="90">90</option>
+                </select>
+            </section>
 
             <section>
-                {(tossinfo.team!=='' && tossinfo.chossto!=='')?<Link to="/score"><p>NEXT</p></Link>:<p></p>}
+                {(tossinfo.team!=='' && tossinfo.chossto!=='' && tossinfo.toss!==0)?<Link to="/score"><p>NEXT</p></Link>:<p></p>}
             </section>
 
         </div>
