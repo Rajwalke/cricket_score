@@ -3,13 +3,11 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Body from './components/Body.jsx'
-import Team1 from './components/Team1.jsx'
 import { Provider } from 'react-redux'
 import appStore from './utils/store.js'
-import Team2 from './components/Team2.jsx'
 import Teamnfo from './components/Teaminfo.jsx'
 import Teamtoss from './components/Teamtoss.jsx'
-import Score from './components/Score.jsx'
+import Scoreteam1 from './components/Scoreteam1.jsx'
 
 const appRoute=createBrowserRouter([
   {
@@ -26,7 +24,7 @@ const appRoute=createBrowserRouter([
   },
   {
     path:"/score",
-    element:<Score/>
+    element:<Scoreteam1/>
   }
 ])
 

@@ -6,7 +6,7 @@ import { updateToss } from "../utils/teaminfoslice";
 const Teamtoss=()=>{
     const [tossWinTeam,setTossWinTeam]=useState('');
     const [chooseto,setChooseto]=useState('');
-    console.log("toss:",tossWinTeam,"elect:",chooseto);
+    // console.log("toss:",tossWinTeam,"elect:",chooseto);
     const tossinfo=useSelector((store)=>store.Info.toss);
     const dispatch=useDispatch();
     return(
@@ -47,8 +47,9 @@ const Teamtoss=()=>{
                 <label>How Many Overs</label>
                 <select
                 onChange={(e)=>{
-                    dispatch(updateToss({key:'overs',value:e.target.value}))
+                    dispatch(updateToss({key:'overs',value:Number(e.target.value)}))
                 }} >
+                    <option value="2">2</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="10">10</option>
@@ -62,7 +63,7 @@ const Teamtoss=()=>{
             </section>
 
             <section>
-                {(tossinfo.team!=='' && tossinfo.chossto!=='' && tossinfo.toss!==0)?<Link to="/score"><p>NEXT</p></Link>:<p></p>}
+                {(tossinfo.team!=='' && tossinfo.chossto!=='' && tossinfo.overs!==0)?<Link to="/score"><p>NEXT</p></Link>:<p></p>}
             </section>
 
         </div>

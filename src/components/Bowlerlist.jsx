@@ -1,9 +1,17 @@
+import { useDispatch } from "react-redux";
+import { updateBowlerOver, updateCurrentNewBowler } from "../utils/teaminfoslice";
+
 const Bowlerlist=(props)=>{
-    const {allbowlerinfo,setBowlerPopup,setCurrentbowlerInfo,srNoOfBalls}=props;
-    console.log("AllowBolwers",allbowlerinfo,srNoOfBalls)
+    const {setCurrentOver,allbowlerinfo,setBowlerPopup,setCurrentbowlerInfo,srNoOfBalls,setEnableAddBowlerbutton}=props;
+    // console.log("AllowBolwers",allbowlerinfo,srNoOfBalls);
+    const dispatch=useDispatch();
     function passInfo(info){
         setCurrentbowlerInfo(info);
         setBowlerPopup(false);
+        setEnableAddBowlerbutton(false);
+        dispatch(updateCurrentNewBowler());
+        dispatch(updateBowlerOver(info.id));
+        // setCurrentOver();
     }
     return(
         <div className="flex flex-col gap-2">
