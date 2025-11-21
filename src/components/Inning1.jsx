@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+    import { useEffect, useState } from "react";
 import Ballingside from "./Ballingside";
 import { useDispatch, useSelector } from "react-redux";
 import { updatecurrentBatBallStatus } from "../utils/teaminfoslice";
 import Battingside from "./Battingside";
-import Totalscore from "./TotalScore";
+import TotalscoreInning1 from "./TotalscoreInning1";
 
-const Scoreteam1=()=>{
+const Inning1=()=>{
     // console.log("Props are",props);
     // const toss=props.toss;
+    const teamName=useSelector((store)=>store.Info.TeamName);
     const[battingTeam,setBattingTeam]=useState([]);
     const[ballingTeam,setBowllingteam]=useState([]);
     const toss=useSelector((store)=>store.Info.toss);
@@ -15,6 +16,8 @@ const Scoreteam1=()=>{
     const team2=useSelector((store)=>store.Info.team2info);
     const dispatch=useDispatch();
     const currentBatBallStatus=useSelector((store)=>store.Info.currentBatBallStatus);
+    const battingTeamName=(currentBatBallStatus.batting==='team1')? teamName.team1 : teamName.team2;
+    const bowlingTeamName=(currentBatBallStatus.bowling==='team1')? teamName.team1 : teamName.team2;
     useEffect(()=>{
         battingAndBallingTeam();
     },[team1,team2]);
@@ -37,7 +40,7 @@ const Scoreteam1=()=>{
     // console.log("Balling Info",ballingTeam);
     useEffect(()=>{
         if(currentBatBallStatus.batting==='team1'){
-             setBattingTeam(team1);
+            setBattingTeam(team1);
             setBowllingteam(team2);
         }else{
             setBattingTeam(team2);
@@ -47,17 +50,17 @@ const Scoreteam1=()=>{
     
     return(
         <div>
-            <div>
-                <Totalscore/>
+            <div className="flex justify-center items-center ">
+                <TotalscoreInning1  bowlingTeamName={bowlingTeamName} battingTeamName={battingTeamName} />
             </div>
-            <h1>Team1 Batting</h1>
+            <h1></h1>
             <div>
-                <Battingside info={battingTeam}/>
+                <Battingside info={battingTeam} battingTeamName={battingTeamName}/>
             </div>
             <div>
-                <Ballingside info={ballingTeam} />
+                <Ballingside info={ballingTeam} bowlingTeamName={bowlingTeamName}/>
             </div>
         </div>
     )
 };
-export default Scoreteam1;
+export default Inning1;

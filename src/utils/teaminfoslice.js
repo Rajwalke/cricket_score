@@ -140,11 +140,61 @@ const teamInfoSlice=createSlice({
             overs:0,
             balls:0,
         },
+        inning2Score:{
+            runs:0,
+            wicket:0,
+            overs:0,
+            balls:0,
+            runsRequired:0,
+            ballRenmaining:0
+        },
+        currentInning:{
+            inning:1
+        },
+        TeamName:{
+            team1:"",
+            team2:""
+        }
         
     },
     reducers:{
+        updateTeamName:(state,action)=>{
+            const {id,value}=action.payload;
+            if(id===1){
+                state.TeamName.team1=value;
+            }else if(id===2){
+                state.TeamName.team2=value;
+            }
+        },
+        updateSecondInningchasseScore:(state,action)=>{
+            state.inning2Score.runsRequired=state.inning1Score.runs;
+            state.inning2Score.ballRenmaining=state.toss.overs*6
+        }
+        ,
+        updateInning2RunsAndBalls:(state,action)=>{
+            const runs=action.payload;
+            if(state.currentInning.inning===2){
+                if(runs==='WD' || runs==='NO'){
+                state.inning2Score.runsRequired-=1;
+                }else if(runs=='WK'){
+                    state.inning2Score.ballRenmaining-=1;
+                }else{
+                    state.inning2Score.ballRenmaining-=1;
+                    const run=Number(runs);
+                    state.inning2Score.runsRequired-=run;
+                }
+            }
+            
+        }
+        ,
+        updateCurrentInning:(state,action)=>{
+            state.currentInning.inning=2;
+        }
+        ,
         updateInningScore1:(state,action)=>{
             const{parameter,value}=action.payload;
+            if(state.currentInning.inning===1){
+            
             if(state.inning1Score.balls===6){
                 state.inning1Score.balls=0;
             }
@@ -163,6 +213,29 @@ const teamInfoSlice=createSlice({
             else{
                 state.inning1Score.overs=value;
                 // state.inning1Score.balls=0;
+            }
+            }
+            
+            else{
+                if(state.inning2Score.balls===6){
+                state.inning2Score.balls=0;
+                }
+
+                if(parameter==='runs'){
+                     if(value==='WD' || value==='NO' ){
+                        state.inning2Score.runs+=1;
+                    }else if(value==='WK'){
+                        state.inning2Score.wicket+=1;
+                        state.inning2Score.balls+=1;
+                    }else{
+                        state.inning2Score.runs+=Number(value);
+                        state.inning2Score.balls+=1;
+                    }
+                }
+                else{
+                    state.inning2Score.overs=value;
+                    // state.inning1Score.balls=0;
+                }
             }
         },
         updateCurrentBatballStatus:(state,action)=>{
@@ -186,7 +259,7 @@ const teamInfoSlice=createSlice({
             }
             
         },
-       updateBatsmanRun:(state,action)=>{
+        updateBatsmanRun:(state,action)=>{
         const {id,value}=action.payload;
 
         if(state.currentBowlerScore.length>1){
@@ -194,6 +267,7 @@ const teamInfoSlice=createSlice({
                 // team1 batsman score upadte
                 const player=state.team1Info.find((p)=>p.id===id);
                 // console.log("play1 name is",player);
+                if(player){
                 player.ballPlayed+=1;
                 if(value==='WK'){
                     player.out=true;
@@ -207,11 +281,12 @@ const teamInfoSlice=createSlice({
                     }
                     
                 }
-                
+            }
             }else{
                 // team2batsmanscore update
                 const player=state.team2info.find((p)=>p.id===id);
                 // console.log("play2 name is",player);
+                if(player){
                 player.ballPlayed+=1;
                 if(value==='WK'){
                     player.out=true;
@@ -224,8 +299,9 @@ const teamInfoSlice=createSlice({
                     }
                 }
             }
+            }
         }
-       },
+        },
         updateballinginfo:(state,action)=>{
             const {id,value}=action.payload;
             // let finalscore=value.reduce((acc, curr) => acc + curr, 0)
@@ -325,13 +401,15 @@ const teamInfoSlice=createSlice({
             const {key,value}=action.payload;
             state.toss[key]=value;
         },
-        
-
-
+    
     }
 });
 export default teamInfoSlice.reducer;
 export const {
+    updateTeamName,
+    updateInning2RunsAndBalls,
+    updateSecondInningchasseScore,
+    updateCurrentInning,
     updateInningScore1,
     updateCurrentBatballStatus,
     updateBowlerOver,

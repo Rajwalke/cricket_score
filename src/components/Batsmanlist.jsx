@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentBatballStatus } from "../utils/teaminfoslice";
+import { updateCurrentBatballStatus, updateCurrentInning, updateSecondInningchasseScore } from "../utils/teaminfoslice";
+import { Link } from "react-router-dom";
 
 const Batsmanlist=(porps)=>{
     const {batsmanInfo,setbatsman1,setbatsman2,setBatsmanPopup,batsman1,batsman2}=porps;
@@ -40,11 +41,15 @@ const Batsmanlist=(porps)=>{
             }
             {
                 (checkallOutOrNot.length===1) ?
+                <Link to="/inning2">
                 <button className="bg-amber-300 p-2 "
                 onClick={()=>{
                     dispatch(updateCurrentBatballStatus());
+                    dispatch(updateCurrentInning());
+                    dispatch(updateSecondInningchasseScore())
                 }}
-                >Next Inning</button>:
+                >Next Inning</button>
+                </Link>:
                 (batsman1==='' || batsman2==='')?<p>Please slect two batsman</p>:
                 <button onClick={setBatsmanPopup}>Selected</button>
                 // <button onClick={setBatsmanPopup}>Selected</button>

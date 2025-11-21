@@ -9,6 +9,7 @@ const Teamtoss=()=>{
     // console.log("toss:",tossWinTeam,"elect:",chooseto);
     const tossinfo=useSelector((store)=>store.Info.toss);
     const dispatch=useDispatch();
+    const teamName=useSelector((store)=>store.Info.TeamName);
     return(
         <div>
             <section>
@@ -19,13 +20,14 @@ const Teamtoss=()=>{
                         // setTossWinTeam('team1');
                         dispatch(updateToss({key:'team',value:'team1'}))
                     }}
-                    >Team1</button>
+                    >{teamName.team1}</button>
+
 
                     <button
                     onClick={()=>{
                          dispatch(updateToss({key:'team',value:'team2'}))
                     }}
-                    >Team2</button>
+                    >{teamName.team2}</button>
                 </div>
             </section>
             <section>
@@ -49,7 +51,8 @@ const Teamtoss=()=>{
                 onChange={(e)=>{
                     dispatch(updateToss({key:'overs',value:Number(e.target.value)}))
                 }} >
-                    <option value="2">2</option>
+                    <option disabled selected>select the over</option>
+                   <option value="2">2</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="10">10</option>
@@ -63,7 +66,7 @@ const Teamtoss=()=>{
             </section>
 
             <section>
-                {(tossinfo.team!=='' && tossinfo.chossto!=='' && tossinfo.overs!==0)?<Link to="/score"><p>NEXT</p></Link>:<p></p>}
+                {(tossinfo.team!=='' && tossinfo.chossto!=='' && tossinfo.overs!==0)?<Link to="/inning1"><p>NEXT</p></Link>:<p></p>}
             </section>
 
         </div>

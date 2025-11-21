@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addteam1, updateuserName } from "../utils/teaminfoslice";
+import { addteam1, updateTeamName, updateuserName } from "../utils/teaminfoslice";
 const Team1=()=>{
     // const [playerQuanity,setPlayerQuantity]=useState(11);
     const dispatch=useDispatch();
     const playerQuanity=useSelector((store)=>store.Info.team1Info);
+    const team1Name=useSelector((store)=>store.Info.TeamName.team1);
     // const [userName,setUsername]=useState('');
     return(
         <div>
-            <h1>Team1</h1>
+            <h1>Team-1</h1>
             {/* <select onChange={(e)=>{
                 // setPlayerQuantity(e.target.value);
                 dispatch(addteam1(e.target.value));
@@ -21,17 +22,33 @@ const Team1=()=>{
                 <option value="11" selected>11</option>
             </select> */}
 
+           
+                
             <div>
+                
+                <div>
                 {
-                    playerQuanity.map((info,index)=>(
-                     <input key={index} type="text" placeholder="enter player name "
-                     value={info.playerName}
-                     onChange={(e)=>{
-                        dispatch(updateuserName({index:index,value:e.target.value}));
-                     }}
-                     />
-                    ))
+                    (playerQuanity>='5')&&
+                    <>
+                    <div>
+                    <input type="text" placeholder="Enter Your Name"
+                    value={team1Name}
+                    onChange={(e)=>dispatch(updateTeamName({id:1,value:e.target.value}))}
+                    />
+                </div>
+                    {
+                        playerQuanity.map((info,index)=>(
+                         <input key={index} type="text" placeholder="enter player name "
+                         value={info.playerName}
+                         onChange={(e)=>{
+                            dispatch(updateuserName({index:index,value:e.target.value}));
+                         }}
+                         />
+                        ))
+                    }
+                </>
                 }
+                </div>
             </div>
         </div>
     )

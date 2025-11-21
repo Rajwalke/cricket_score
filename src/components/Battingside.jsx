@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateBatsmanRun } from "../utils/teaminfoslice";
 
 const Battingside=(props)=>{
-    const {info}=props;
+    const {info,battingTeamName}=props;
     const [batsmanpopup,setBatsmanPopup]=useState(true);
     const [batsman1,setbatsman1]=useState('');
     const [batsman2,setbatsman2]=useState('');
     const [strikerBatsman,setstrikerBatsman]=useState(1);
-    const team1=useSelector((store)=>store.Info.team1Info);//-------
-    const team2=useSelector((store)=>store.Info.team2info);  //-------
+    const team1=useSelector((store)=>store.Info.team1Info);
+    const team2=useSelector((store)=>store.Info.team2info);
     const dispatch=useDispatch();
     const currentBowlerScore=useSelector((store)=>store.Info.currentBowlerScore);
     const currentBatBallStatus=useSelector((store)=>store.Info.currentBatBallStatus);
@@ -70,7 +70,7 @@ const Battingside=(props)=>{
    },[team1,team2]);
     return(
         <div>
-            <h1>Batting Teams</h1>
+            <h1>Batting Info {battingTeamName}</h1>
             {
                 batsmanpopup&&
                 <Batsmanlist setBatsmanPopup={()=>setBatsmanPopup(false)} setbatsman1={setbatsman1} setbatsman2={setbatsman2} batsmanInfo={info} batsman1={batsman1} batsman2={batsman2}/>

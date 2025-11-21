@@ -7,8 +7,9 @@ import { Provider } from 'react-redux'
 import appStore from './utils/store.js'
 import Teamnfo from './components/Teaminfo.jsx'
 import Teamtoss from './components/Teamtoss.jsx'
-import Scoreteam1 from './components/Scoreteam1.jsx'
 
+import Inning1 from "./components/Inning1.jsx"
+import Inning2 from './components/Inning2.jsx'
 const appRoute=createBrowserRouter([
   {
     path:"/",
@@ -23,8 +24,12 @@ const appRoute=createBrowserRouter([
     element:<Teamtoss/>
   },
   {
-    path:"/score",
-    element:<Scoreteam1/>
+    path:"/inning1",
+    element:<Inning1/>
+  },
+  {
+    path:"/inning2",
+    element:<Inning2/>
   }
 ])
 

@@ -3,10 +3,12 @@ import Bowlerlist from "./Bowlerlist";
 import Currentball from "./Currentball";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import Abc from "./Abc";
-import { updateInningScore1 } from "../utils/teaminfoslice";
+import { updateCurrentBatballStatus, updatecurrentBatBallStatus, updateCurrentInning, updateInningScore1, updateSecondInningchasseScore } from "../utils/teaminfoslice";
+import { Link } from "react-router-dom";
 
 const Ballingside=(props)=>{
     // console.log(props)
+    const {bowlingTeamName}=props;
     const dispatch=useDispatch();
     const [bowlerPopup,setBowlerPopup]=useState(false);
     const [currentBowlerInfo,setCurrentbowlerInfo]=useState('');
@@ -49,7 +51,7 @@ const Ballingside=(props)=>{
      dispatch(updateInningScore1({parameter:'overs',value:currentOver}));
     return(
         <div>
-            <h1>Balling side</h1>
+            <h1>Balling side {bowlingTeamName}</h1>
 
             <div>
                 {
@@ -60,7 +62,17 @@ const Ballingside=(props)=>{
                             
                         }}
                         >ADD BOWLER +</button>:(currentOver!==overs)?
-                    <button className="bg-yellow-300 text-md text-black py-1 px-2 rounded-md cursor-pointer">ADD BOWLER🚫</button>:<button className="bg-yellow-300 text-md text-black py-1 px-2 rounded-md cursor-pointer">next inning</button>
+                    <button className="bg-yellow-300 text-md text-black py-1 px-2 rounded-md cursor-pointer">ADD BOWLER🚫</button>:
+                    <Link to="/inning2">
+                        <button className="bg-amber-300 p-2 "
+                        onClick={()=>{
+                            dispatch(updateCurrentBatballStatus());
+                            dispatch(updateCurrentInning());
+                            dispatch(updateSecondInningchasseScore())
+                        }}
+                        >Next Inning</button>
+                    </Link>
+                    
                 }
                 
             </div>
