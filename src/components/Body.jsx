@@ -66,9 +66,12 @@ const Body = () => {
               Start Scoring Now
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button className="bg-white text-emerald-700 px-8 py-4 rounded-xl font-semibold border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 shadow-md">
+
+            
+            <a href="https://youtu.be/pr-xGXlLqmo?si=bglWWVEoBiQn73LZ" target="blank" ><button className="bg-white text-emerald-700 px-8 py-4 rounded-xl font-semibold border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 shadow-md">
               Watch Demo
             </button>
+            </a>
           </div>
         </div>
 
