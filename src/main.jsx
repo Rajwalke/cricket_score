@@ -10,6 +10,7 @@ import Teamtoss from './components/Teamtoss.jsx'
 
 import Inning1 from "./components/Inning1.jsx"
 import Inning2 from './components/Inning2.jsx'
+import Matchsummery from './components/MatchSummery.jsx'
 const appRoute=createBrowserRouter([
   {
     path:"/",
@@ -30,6 +31,10 @@ const appRoute=createBrowserRouter([
   {
     path:"/inning2",
     element:<Inning2/>
+  },
+  {
+    path:"/matchsummery",
+    element:<Matchsummery/>
   }
 ])
 

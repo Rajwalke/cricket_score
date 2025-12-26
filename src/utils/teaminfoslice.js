@@ -154,10 +154,14 @@ const teamInfoSlice=createSlice({
         TeamName:{
             team1:"",
             team2:""
-        }
+        },
+        bowlerName:''
         
     },
     reducers:{
+        updateBolwerName:(state,action)=>{
+            state.bowlerName=action.payload;
+        },
         updateTeamName:(state,action)=>{
             const {id,value}=action.payload;
             if(id===1){
@@ -271,6 +275,7 @@ const teamInfoSlice=createSlice({
                 player.ballPlayed+=1;
                 if(value==='WK'){
                     player.out=true;
+                    player.wicketTakenBy=state.bowlerName;
                 }else{
                     player.runs+=Number(value);
                     
@@ -290,6 +295,7 @@ const teamInfoSlice=createSlice({
                 player.ballPlayed+=1;
                 if(value==='WK'){
                     player.out=true;
+                    player.wicketTakenBy=state.bowlerName;
                 }else{
                     player.runs+=Number(value);
                     if(Number(value)===4){
@@ -364,7 +370,8 @@ const teamInfoSlice=createSlice({
                     over:0,
                     out:false,
                     ballPlayed:0,
-                    bowlingruns:0
+                    bowlingruns:0,
+                    wicketTakenBy:''
                 })
             }
         },
@@ -387,7 +394,8 @@ const teamInfoSlice=createSlice({
                     over:0,
                     out:false,
                     ballPlayed:0,
-                    bowlingruns:0
+                    bowlingruns:0,
+                    wicketTakenBy:''
                 }
                 )
             }
@@ -422,5 +430,6 @@ export const {
     updateCurrentBowler,
     updateCurrentNewBowler,
     updatecurrentBatBallStatus,
-    updateBatsmanRun
+    updateBatsmanRun,
+    updateBolwerName
 }=teamInfoSlice.actions
