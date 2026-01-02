@@ -9,7 +9,6 @@ const Matchsummery = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   const API_KEY = import.meta.env.VITE_API_KEY;
-  console.log("API KEY ", API_KEY);
   const ai = new GoogleGenAI({ apiKey: API_KEY });
   const team1Data = useSelector((store) => store.Info.team1Info);
   const team2Data = useSelector((store) => store.Info.team2info);
@@ -58,7 +57,7 @@ INSTRUCTIONS:
 - Mention who won and by what margin.
 - Highlight key batting and bowling performances.
 - Keep the summary concise and readable.
-- Do NOT include raw JSON or technical data.and dont use * charcter
+- Do NOT include raw JSON or technical data.and dont use * charcter in result
 `
               }
             ]
