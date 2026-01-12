@@ -22,7 +22,9 @@ const Resultmodal = (props) => {
     }
     function searchTheResult(){
         if(searchtext===""){
-            setFilterresult([])
+            console.log("Plauers is empty",filterresult)
+            setFilterresult([]);
+            return;
         }
         const filtertheplayerTeam1=team1Info.filter((info,index)=>{
              if(info.playerName.toLocaleLowerCase().includes(searchtext))return info;
