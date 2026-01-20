@@ -11,7 +11,7 @@ const Resultmodal = (props) => {
     const [searchtext,setSearchtext]=useState('');
     const [team1Switch, setteam1Switch] = useState(true);
     const [filterresult,setFilterresult]=useState([]);
-    console.log("team1Info is",team1Info);
+    // console.log("team1Info is",team1Info);
     let i=1;
     const [summeryPopup,setSummeryPopup]=useState(false);
     function popupShow(){
@@ -21,8 +21,10 @@ const Resultmodal = (props) => {
         }, 3000);
     }
     function searchTheResult(){
+        console.log("SEARCH TEXT IS",searchtext);
         if(searchtext===""){
-            setFilterresult([])
+            setFilterresult([]);
+            return ;
         }
         const filtertheplayerTeam1=team1Info.filter((info,index)=>{
              if(info.playerName.toLocaleLowerCase().includes(searchtext))return info;
@@ -33,7 +35,7 @@ const Resultmodal = (props) => {
             if(info.playerName.toLocaleLowerCase().includes(searchtext))return info;
         })
         setFilterresult([...filtertheplayerTeam1,...filtertheplayerTeam2]);
-        console.log("filter player is ",filterresult);
+        // console.log("filter player is ",filterresult);
     }
     return (
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
