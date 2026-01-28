@@ -118,7 +118,7 @@ const Battingside = (props) => {
                         </div>
                         <div className="text-center">{batsman1?.four || 0}</div>
                         <div className="text-center">{batsman1?.six || 0}</div>
-                        <div className="text-center">{batsman1?.balls || 0}</div>
+                        <div className="text-center">{batsman1?.ballPlayed || 0}</div>
                         <div className="text-center font-bold text-lg">{batsman1?.runs || 0}</div>
                     </div>
                 </div>

@@ -2,12 +2,78 @@
 import { Link } from "react-router-dom";
 import Team1 from "./Team1";
 import Team2 from "./Team2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addteam1, addteam2 } from "../utils/teaminfoslice";
 import { Users, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Teamnfo = () => {
     const dispatch = useDispatch();
+    const team1Info=useSelector(store=>store.Info.team1Info);
+    const team2Info=useSelector(store=>store.Info.team2info);
+    const TeamName=useSelector(store=>store.Info.TeamName);
+    const [btnEnable,setButtonenable]=useState(false);
+    console.log("check",btnEnable);
+    function teamplayerNamecheck(team1Info,team2Info){
+        
+        //  team1Info.map((info)=>{
+        //     if(info.playerName===""){
+        //         return false;
+        //     }
+        // });
+        // team2Info.map((info)=>{
+        //     if(info.playerName===""){
+        //         return false;
+        //     } 
+        // });
+        
+        // let ans1=true;
+        // let ans2=true;
+         
+
+    console.log("Ans is",ans1,ans2);
+        // if(ans1===false || ans2===false)return false;
+        // else return true;
+      
+        
+    }
+     function checkallInfofill(team1Info,team2Info){
+        if(team1Info.length===0 && team2Info.length===0){
+            setButtonenable(false);
+            return;
+        }
+
+        if(TeamName.team1==="" || TeamName.team2==="" || TeamName.team1===TeamName.team2){
+            setButtonenable(false);
+            return;
+        }
+
+        for (let i = 0; i < team1Info.length; i++) {
+            if (team1Info[i].playerName === "") {
+                // ans1 = false;
+                setButtonenable(false);
+                return;
+            }
+        }
+        for (let i = 0; i < team2Info.length; i++) {
+            if (team2Info[i].playerName === "") {
+                setButtonenable(false);
+            return;
+            }
+        }      
+           setButtonenable(true);
+        // teamplayerNamecheck(team1Info,team2Info);
+        // if(teamplayerNamecheck(team1Info,team2Info)){
+        //     setButtonenable(true);
+        // }
+        // else{
+        //     return ;
+        // }
+        
+    }
+    useEffect(()=>{
+       checkallInfofill(team1Info,team2Info)
+    },[team1Info,team2Info,TeamName]);
     return (
         <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-green-50">
             {/* Header */}
@@ -58,15 +124,22 @@ const Teamnfo = () => {
 
                 {/* Next Button */}
                 <div className="flex justify-center">
+                    {
+                        (btnEnable)?
                     <Link to="/toss">
                         <button className="group bg-gradient-to-r from-emerald-600 to-green-600 text-white px-10 py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center">
                             Proceed to Toss
                             <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </button>
-                    </Link>
+                    </Link>:
+                    <button className="group bg-gradient-to-r from-red-600 to-red-600 text-white px-10 py-4 rounded-xl font-semibold hover:from-emerald-700 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center opacity-50 disabled:cursor-not-allowed">
+                            Proceet to Toss
+                    </button>
+                    }   
                 </div>
             </div>
         </div>
     );
 };
 export default Teamnfo;
+
