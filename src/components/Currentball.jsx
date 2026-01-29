@@ -39,7 +39,8 @@ const Currentball = (props) => {
                         setCurrentValue(e.target.value);
                         setEnableBtn(false);
                         dispatch(updateInning2RunsAndBalls(e.target.value));
-                        dispatch(updateCurrentBowlerRuns(Number(e.target.value)));
+                        if(e.target.value!=="WK")dispatch(updateCurrentBowlerRuns(Number(e.target.value)));
+                        
                     }
                     
                 }}
