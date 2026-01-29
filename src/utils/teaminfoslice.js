@@ -15,104 +15,6 @@ const teamInfoSlice=createSlice({
             //         wicket:0,
             //         over:0
             //     },
-            //     {
-            //         id:1,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:2,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:3,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:4,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:5,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:6,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:7,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },{
-            //         id:8,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:9,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:10,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     },
-            //     {
-            //         id:11,
-            //         playerName:'',
-            //         four:0,
-            //         six:0,
-            //         runs:0,
-            //         wicket:0,
-            //         over:0
-            //     }
         ],
         toss:{
             team:'',
@@ -155,10 +57,19 @@ const teamInfoSlice=createSlice({
             team1:"",
             team2:""
         },
-        bowlerName:''
+        bowlerName:'',
+        currentBowlerRun:0
         
     },
     reducers:{
+        updateCurrentBowlerRuns:(state,action)=>{
+            const run=action.payload;
+            if(run===1000){
+                state.currentBowlerRun=0;
+            }else{
+                state.currentBowlerRun+=run;
+            }
+        },
         updateBolwerName:(state,action)=>{
             state.bowlerName=action.payload;
         },
@@ -176,10 +87,10 @@ const teamInfoSlice=createSlice({
         }
         ,
         updateInning2RunsAndBalls:(state,action)=>{
-            const runs=action.payload;
+            const {runs,extraRuns}=action.payload;
             if(state.currentInning.inning===2){
                 if(runs==='WD' || runs==='NO'){
-                state.inning2Score.runsRequired-=1;
+                state.inning2Score.runsRequired-=Number(extraRuns)-1;
                 }else if(runs=='WK'){
                     state.inning2Score.ballRenmaining-=1;
                 }else{
@@ -196,7 +107,7 @@ const teamInfoSlice=createSlice({
         }
         ,
         updateInningScore1:(state,action)=>{
-            const{parameter,value}=action.payload;
+            const{parameter,value,extraRuns}=action.payload;
             if(state.currentInning.inning===1){
             
             if(state.inning1Score.balls===6){
@@ -205,7 +116,7 @@ const teamInfoSlice=createSlice({
 
             if(parameter==='runs'){
                  if(value==='WD' || value==='NO' ){
-                    state.inning1Score.runs+=1;
+                    state.inning1Score.runs+=Number(extraRuns)+1;
                 }else if(value==='WK'){
                     state.inning1Score.wicket+=1;
                     state.inning1Score.balls+=1;
@@ -227,7 +138,7 @@ const teamInfoSlice=createSlice({
 
                 if(parameter==='runs'){
                      if(value==='WD' || value==='NO' ){
-                        state.inning2Score.runs+=1;
+                        state.inning2Score.runs+=Number(extraRuns)+1;
                     }else if(value==='WK'){
                         state.inning2Score.wicket+=1;
                         state.inning2Score.balls+=1;
@@ -309,14 +220,14 @@ const teamInfoSlice=createSlice({
         }
         },
         updateballinginfo:(state,action)=>{
-            const {id,value}=action.payload;
+            const {id,value,extraRuns}=action.payload;
             // let finalscore=value.reduce((acc, curr) => acc + curr, 0)
             if(state.currentBatBallStatus.bowling ==='team2'){
                 // state.team2Info
                 const player = state.team2info.find((p) => p.id === id);
                 // let num=value.filter
                 if(value==='WD' || value==='NO' ){
-                    player.bowlingruns+=1;
+                    player.bowlingruns+=Number(extraRuns)+1;
                 }else if(value==='WK'){
                     player.wicket+=1;
                 }else{
@@ -327,7 +238,7 @@ const teamInfoSlice=createSlice({
                 // state.team1Info
                 const player = state.team1Info.find((p) => p.id === id);
                 if(value==='WD' || value==='NO' ){
-                    player.bowlingruns+=1;
+                    player.bowlingruns+=Number(extraRuns)+1;
                 }else if(value==='WK'){
                     player.wicket+=1;
                 }else{
@@ -431,5 +342,6 @@ export const {
     updateCurrentNewBowler,
     updatecurrentBatBallStatus,
     updateBatsmanRun,
-    updateBolwerName
+    updateBolwerName,
+    updateCurrentBowlerRuns
 }=teamInfoSlice.actions

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateballinginfo, updateCurrentBowler, updateInning2RunsAndBalls, updateInningScore1 } from "../utils/teaminfoslice";
-import { useState } from "react";
+import { updateballinginfo, updateCurrentBowler, updateCurrentBowlerRuns, updateInning2RunsAndBalls, updateInningScore1 } from "../utils/teaminfoslice";
+import { useRef, useState } from "react";
 
 const Currentball = (props) => {
     const { index, ballLength, currentpalyerId } = props;
@@ -8,7 +8,9 @@ const Currentball = (props) => {
     const [enabaleBtn, setEnableBtn] = useState(true);
     const [currentValue, setCurrentValue] = useState(0);
     const currentInning = useSelector((store) => store.Info.currentInning);
-
+    const [popup,setPopup]=useState(false);
+    const currentBall=useRef('');
+    
     const getBallColor = (value) => {
         if (value === 'WK') return 'bg-red-600 text-white';
         if (value === 'WD' || value === 'NO') return 'bg-yellow-500 text-white';
@@ -19,16 +21,27 @@ const Currentball = (props) => {
     };
 
     return (
+        <>
+        {
         enabaleBtn ? (
             <select
                 className="bg-gradient-to-r from-emerald-600 to-green-600 text-white px-4 py-2 rounded-lg cursor-pointer font-semibold hover:from-emerald-700 hover:to-green-700 transition-all duration-200 shadow-md"
                 onChange={(e) => {
-                    dispatch(updateCurrentBowler({ index: index, value: e.target.value }));
-                    dispatch(updateballinginfo({ id: currentpalyerId, value: e.target.value }));
-                    dispatch(updateInningScore1({ parameter: 'runs', value: e.target.value }));
-                    setCurrentValue(e.target.value);
-                    setEnableBtn(false);
-                    dispatch(updateInning2RunsAndBalls(e.target.value));
+                    if(e.target.value==="NO" || e.target.value==="WD"){
+                        currentBall.current=e.target.value;
+                        setPopup(true);
+                    }
+                    else{
+
+                        dispatch(updateCurrentBowler({ index: index, value: e.target.value }));
+                        dispatch(updateballinginfo({ id: currentpalyerId, value: e.target.value }));
+                        dispatch(updateInningScore1({ parameter: 'runs', value: e.target.value }));
+                        setCurrentValue(e.target.value);
+                        setEnableBtn(false);
+                        dispatch(updateInning2RunsAndBalls(e.target.value));
+                        dispatch(updateCurrentBowlerRuns(Number(e.target.value)));
+                    }
+                    
                 }}
             >
                 <option selected disabled>+</option>
@@ -48,6 +61,36 @@ const Currentball = (props) => {
                 {currentValue}
             </div>
         )
+        }
+
+        {
+            popup &&
+            (
+                <select  
+                onChange={(e)=>{
+                    console.log("Extra Runs Are ",e.target.value);
+                        dispatch(updateCurrentBowler({ index: index, value: currentBall.current, extraRuns:e.target.value }));
+                        dispatch(updateballinginfo({ id: currentpalyerId, value: currentBall.current,extraRuns:e.target.value }));
+                        dispatch(updateInningScore1({ parameter: 'runs', value: currentBall.current,extraRuns:e.target.value}));
+                        setCurrentValue(currentBall.current);
+                        dispatch(updateCurrentBowlerRuns(Number(e.target.value)+1));
+                        setEnableBtn(false);
+                        dispatch(updateInning2RunsAndBalls({runs:currentBall.current , extraRuns: e.target.value}));
+                        setPopup(false);
+                }}
+                >
+                    <option selected disabled> + Runs</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            )
+        }
+        </>
     );
 };
 export default Currentball;

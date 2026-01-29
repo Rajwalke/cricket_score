@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { updateBolwerName, updateBowlerOver, updateCurrentNewBowler } from "../utils/teaminfoslice";
+import { updateBolwerName, updateBowlerOver, updateCurrentBowlerRuns, updateCurrentNewBowler } from "../utils/teaminfoslice";
 import { X, Target } from "lucide-react";
 
 const Bowlerlist = (props) => {
@@ -13,6 +13,7 @@ const Bowlerlist = (props) => {
         dispatch(updateCurrentNewBowler());
         dispatch(updateBowlerOver(info.id));
         dispatch(updateBolwerName(info.playerName));
+        dispatch(updateCurrentBowlerRuns(1000));
     }
 
     return (

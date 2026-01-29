@@ -16,6 +16,7 @@ const Ballingside = (props) => {
     const [currentOver, setCurrentOver] = useState(0);
     const currentballs = useSelector((store) => store.Info.currentBowlerScore);
     const [enableAddBowlerButton, setEnableAddBowlerbutton] = useState(true);
+    const currentOverScore=useSelector(store=>store.Info.currentBowlerRun);
 
     const filterTheTotoalBalls = currentballs.filter((ball) => {
         if (ball !== "WD" && ball !== "NO") {
@@ -144,7 +145,7 @@ const Ballingside = (props) => {
                             </div>
                             <div>
                                 <p className="text-xs text-gray-600">Runs</p>
-                                <p className="text-lg font-bold text-blue-600">{current_totoalRun}</p>
+                                <p className="text-lg font-bold text-blue-600">{currentOverScore}</p>
                             </div>
                         </div>
                     </div>
