@@ -31,6 +31,7 @@ const Body = () => {
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div
+        
           className={`text-center transition-all duration-1000 transform ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
