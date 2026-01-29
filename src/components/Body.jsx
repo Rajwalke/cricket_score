@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Trophy, Users, BarChart3, Clock, ArrowRight, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
-
+import logo from "../assets/logo.png"
 const Body = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -13,15 +13,10 @@ const Body = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-green-50">
       {/* Header/Navbar */}
       <nav className="bg-white shadow-sm border-b border-emerald-100">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-2 py-1">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-emerald-600 to-green-700 p-2 rounded-lg">
-                <Trophy className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-emerald-700 to-green-600 bg-clip-text text-transparent">
-                CricDash
-              </span>
+            <div className="flex items-center">
+              <img className="w-2/12" src={logo} />
             </div>
             <Link
               to="/team1"
