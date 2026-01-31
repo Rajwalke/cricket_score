@@ -58,10 +58,17 @@ const teamInfoSlice=createSlice({
             team2:""
         },
         bowlerName:'',
-        currentBowlerRun:0
+        currentBowlerRun:0,
+        extraRunOnNoWide:0,
         
     },
     reducers:{
+        updateExtraRunsOnNoWide:(state,action)=>{
+            
+            const extraRuns=action.payload;
+            console.log("Im here in Extra",extraRuns)
+            state.extraRunOnNoWide=extraRuns;
+        },
         updateCurrentBowlerRuns:(state,action)=>{
             const run=action.payload;
             if(run===1000){
@@ -183,11 +190,16 @@ const teamInfoSlice=createSlice({
                 const player=state.team1Info.find((p)=>p.id===id);
                 // console.log("play1 name is",player);
                 if(player){
-                player.ballPlayed+=1;
+               
                 if(value==='WK'){
                     player.out=true;
                     player.wicketTakenBy=state.bowlerName;
-                }else{
+                     player.ballPlayed+=1;
+                }
+                else if(value==='WD' || value==='NO'){
+                    player.runs+=state.extraRunOnNoWide;
+                }
+                else{
                     player.runs+=Number(value);
                     
                     if(Number(value)===4){
@@ -195,7 +207,7 @@ const teamInfoSlice=createSlice({
                     }else if(Number(value)===6){
                         player.six+=1;
                     }
-                    
+                     player.ballPlayed+=1;
                 }
             }
             }else{
@@ -203,17 +215,23 @@ const teamInfoSlice=createSlice({
                 const player=state.team2info.find((p)=>p.id===id);
                 // console.log("play2 name is",player);
                 if(player){
-                player.ballPlayed+=1;
+                
                 if(value==='WK'){
                     player.out=true;
                     player.wicketTakenBy=state.bowlerName;
-                }else{
+                    player.ballPlayed+=1;
+                }
+                else if(value==='WD' || value==='NO'){
+                    player.runs+=state.extraRunOnNoWide;
+                }
+                else{
                     player.runs+=Number(value);
                     if(Number(value)===4){
                         player.four=+1;
                     }else if(Number(value)===6){
                         player.six+=1;
                     }
+                    player.ballPlayed+=1;
                 }
             }
             }
@@ -343,5 +361,6 @@ export const {
     updatecurrentBatBallStatus,
     updateBatsmanRun,
     updateBolwerName,
-    updateCurrentBowlerRuns
+    updateCurrentBowlerRuns,
+    updateExtraRunsOnNoWide
 }=teamInfoSlice.actions

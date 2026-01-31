@@ -15,6 +15,7 @@ const Battingside = (props) => {
     const dispatch = useDispatch();
     const currentBowlerScore = useSelector((store) => store.Info.currentBowlerScore);
     const currentBatBallStatus = useSelector((store) => store.Info.currentBatBallStatus);
+    const extraRuns=useSelector(store=>store.Info.extraRunOnNoWide);
 
     useEffect(() => {
         const currentBallRun = currentBowlerScore[currentBowlerScore.length - 2];
@@ -25,6 +26,14 @@ const Battingside = (props) => {
             } else {
                 const batsmanId = batsman2?.id;
                 dispatch(updateBatsmanRun({ id: batsmanId, value: currentBallRun }));
+            }
+        }else{
+             if (strikerBatsman === 1) {
+                const batsmanId = batsman1?.id;
+                dispatch(updateBatsmanRun({ id: batsmanId, value: currentBallRun}));
+            } else {
+                const batsmanId = batsman2?.id;
+                dispatch(updateBatsmanRun({ id: batsmanId, value: currentBallRun}));
             }
         }
 
