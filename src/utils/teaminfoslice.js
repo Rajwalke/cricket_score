@@ -90,7 +90,7 @@ const teamInfoSlice=createSlice({
             const {runs,extraRuns}=action.payload;
             if(state.currentInning.inning===2){
                 if(runs==='WD' || runs==='NO'){
-                state.inning2Score.runsRequired-=Number(extraRuns)-1;
+                state.inning2Score.runsRequired-=Number(extraRuns)+1;
                 }else if(runs=='WK'){
                     state.inning2Score.ballRenmaining-=1;
                 }else{

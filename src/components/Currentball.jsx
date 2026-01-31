@@ -38,7 +38,7 @@ const Currentball = (props) => {
                         dispatch(updateInningScore1({ parameter: 'runs', value: e.target.value }));
                         setCurrentValue(e.target.value);
                         setEnableBtn(false);
-                        dispatch(updateInning2RunsAndBalls(e.target.value));
+                        dispatch(updateInning2RunsAndBalls({runs: e.target.value, extraRuns: 0}));
                         if(e.target.value!=="WK")dispatch(updateCurrentBowlerRuns(Number(e.target.value)));
                         
                     }
@@ -69,7 +69,7 @@ const Currentball = (props) => {
             (
                 <select  
                 onChange={(e)=>{
-                    console.log("Extra Runs Are ",e.target.value);
+                    console.log("Extra Runs Are ",currentBall.current,":",e.target.value);
                         dispatch(updateCurrentBowler({ index: index, value: currentBall.current, extraRuns:e.target.value }));
                         dispatch(updateballinginfo({ id: currentpalyerId, value: currentBall.current,extraRuns:e.target.value }));
                         dispatch(updateInningScore1({ parameter: 'runs', value: currentBall.current,extraRuns:e.target.value}));
